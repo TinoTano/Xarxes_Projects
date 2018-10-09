@@ -9,6 +9,7 @@ class ModuleMainMenu;
 class ModuleClient;
 class ModuleServer;
 class ModuleLogView;
+class ModuleMessageView;
 
 class Application
 {
@@ -56,6 +57,7 @@ public:
 	ModuleClient *modClient = nullptr;
 	ModuleServer *modServer = nullptr;
 	ModuleLogView *modLogView = nullptr;
+	ModuleMessageView* modMessageView = nullptr;
 
 
 private:

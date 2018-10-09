@@ -2,6 +2,8 @@
 #include "Log.h"
 #include "imgui/imgui.h"
 #include "serialization/PacketTypes.h"
+#include "ModuleMessageView.h"
+#include "Application.h"
 
 #define HEADER_SIZE sizeof(uint32_t)
 #define RECV_CHUNK_SIZE 4096
@@ -216,6 +218,9 @@ void ModuleClient::updateGUI()
 		{
 			if (ImGui::Button("Compose message"))
 			{
+				receiverBuf[0] = '\0';
+				subjectBuf[0] = '\0';
+				messageBuf[0] = '\0';
 				messengerState = MessengerState::ComposingMessage;
 			}
 
@@ -233,13 +238,21 @@ void ModuleClient::updateGUI()
 			int i = 0;
 			for (auto &message : messages)
 			{
-				ImGui::PushID(i++);
+				if (ImGui::Selectable(("- " + message.subject).c_str()))
+				{
+					App->modMessageView->SetMessageToShow(message.subject.c_str(), message.senderUsername.c_str(), "1/10/2018", message.body.c_str());
+				}
+				/*ImGui::PushID(i++);
 				if (ImGui::TreeNode(&message, "%s - %s", message.senderUsername.c_str(), message.subject.c_str()))
 				{
 					ImGui::TextWrapped("%s", message.body.c_str());
 					ImGui::TreePop();
 				}
-				ImGui::PopID();
+				ImGui::PopID();*/
+			}
+			if (messengerState != MessengerState::ShowingMessages)
+			{
+				App->modMessageView->EmptyWindow();
 			}
 		}
 		else if (messengerState == MessengerState::ReceivingMessages)

@@ -5,6 +5,7 @@
 #include "ModuleServer.h"
 #include "ModuleLogView.h"
 #include "SocketUtils.h"
+#include "ModuleMessageView.h"
 
 #define ADD_MODULE(ModuleClass, moduleAttribute) \
 	moduleAttribute = new ModuleClass(); \
@@ -20,11 +21,13 @@ Application::Application()
 	ADD_MODULE(ModuleClient, modClient);
 	ADD_MODULE(ModuleServer, modServer);
 	ADD_MODULE(ModuleLogView, modLogView);
+	ADD_MODULE(ModuleMessageView, modMessageView);
 
 	// Set active modules
 	modWindow->setActive(true);
 	modMainMenu->setActive(true);
 	modLogView->setActive(true);
+	modMessageView->setActive(true);
 }
 
 
