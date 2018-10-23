@@ -41,10 +41,22 @@ void MySqlDatabaseGateway::insertMessage(const Message & message)
 	if (db.isConnected())
 	{
 		DBResultSet res;
+		
+		// Get time
+		char str[26];
+
+#ifdef __STDC_LIB_EXT1__
+		struct tm buf;
+		asctime_s(str, sizeof str, gmtime_s(&t, &buf));
+		printf("UTC:   %s", str);
+		asctime_s(str, sizeof str, localtime_s(&t, &buf));
+		printf("local: %s", str);
+#endif
+		// ----
 
 		std::string sqlStatement;
 		// TODO: Create the SQL statement to insert the passed message into the DB (INSERT)
-		sqlStatement = "INSERT INTO messages VALUES ( (SELECT userid FROM user WHERE name = '" + message.senderUsername + "'), (SELECT userid FROM user WHERE name = '" + message.receiverUsername + "'), " + message.subject + ", " + message.body + ", " + /*currentDateTime() */+ ");";
+		sqlStatement = "INSERT INTO messages VALUES ( (SELECT userid FROM user WHERE name = '" + message.senderUsername + "'), (SELECT userid FROM user WHERE name = '" + message.receiverUsername + "'), " + message.subject + ", " + message.body + ", " + str + ");";
 
 		// insert some messages
 		db.sql(sqlStatement.c_str());
@@ -94,15 +106,3 @@ void MySqlDatabaseGateway::updateGUI()
 	ImGui::InputText("Username", bufMySqlUsername, sizeof(bufMySqlUsername));
 	ImGui::InputText("Password", bufMySqlPassword, sizeof(bufMySqlUsername), ImGuiInputTextFlags_Password);
 }
-
-//const std::string currentDateTime() {
-//	time_t     now = time(0);
-//	struct tm  tstruct;
-//	char       buf[80];
-//	tstruct = *localtime(&now);
-//	// Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
-//	// for more information about date/time format
-//	strftime(buf, sizeof(buf), "%Y-%m-%d %X", &tstruct);
-//
-//	return buf;
-//}
