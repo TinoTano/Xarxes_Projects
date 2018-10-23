@@ -3,6 +3,8 @@
 #include "../imgui/imgui.h"
 #include <cstdarg>
 
+#include <time.h>
+
 // You can use this function to create the SQL statements easily, works like the printf function
 std::string stringFormat(const char *fmt, ...)
 {
@@ -42,6 +44,7 @@ void MySqlDatabaseGateway::insertMessage(const Message & message)
 
 		std::string sqlStatement;
 		// TODO: Create the SQL statement to insert the passed message into the DB (INSERT)
+		sqlStatement = "INSERT INTO messages VALUES ( (SELECT userid FROM user WHERE name = '" + message.senderUsername + "'), (SELECT userid FROM user WHERE name = '" + message.receiverUsername + "'), " + message.subject + ", " + message.body + ", " + /*currentDateTime() */+ ");";
 
 		// insert some messages
 		db.sql(sqlStatement.c_str());
@@ -58,6 +61,7 @@ std::vector<Message> MySqlDatabaseGateway::getAllMessagesReceivedByUser(const st
 	{
 		std::string sqlStatement;
 		// TODO: Create the SQL statement to query all messages from the given user (SELECT)
+		sqlStatement = "SELECT * FROM messages WHERE receiver = (SELECT userid FROM users WHERE name = '" + username + "');";
 
 		// consult all messages
 		DBResultSet res = db.sql(sqlStatement.c_str());
@@ -70,6 +74,7 @@ std::vector<Message> MySqlDatabaseGateway::getAllMessagesReceivedByUser(const st
 			message.receiverUsername = messageRow.columns[1];
 			message.subject = messageRow.columns[2];
 			message.body = messageRow.columns[3];
+			message.date = messageRow.columns[4];
 			messages.push_back(message);
 		}
 	}
@@ -89,3 +94,15 @@ void MySqlDatabaseGateway::updateGUI()
 	ImGui::InputText("Username", bufMySqlUsername, sizeof(bufMySqlUsername));
 	ImGui::InputText("Password", bufMySqlPassword, sizeof(bufMySqlUsername), ImGuiInputTextFlags_Password);
 }
+
+//const std::string currentDateTime() {
+//	time_t     now = time(0);
+//	struct tm  tstruct;
+//	char       buf[80];
+//	tstruct = *localtime(&now);
+//	// Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
+//	// for more information about date/time format
+//	strftime(buf, sizeof(buf), "%Y-%m-%d %X", &tstruct);
+//
+//	return buf;
+//}
