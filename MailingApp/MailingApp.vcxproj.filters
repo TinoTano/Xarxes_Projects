@@ -90,7 +90,7 @@
     <ClCompile Include="src\serialization\MemoryStream.cpp">
       <Filter>Source Files\serialization</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleMessageView.cpp">
+    <ClCompile Include="src\ModuleMessageView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,7 +170,7 @@
     <ClInclude Include="src\serialization\PacketTypes.h">
       <Filter>Header Files\serialization</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleMessageView.h">
+    <ClInclude Include="src\ModuleMessageView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

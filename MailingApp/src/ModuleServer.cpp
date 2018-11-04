@@ -117,6 +117,7 @@ void ModuleServer::sendPacketQueryAllMessagesResponse(SOCKET socket, const std::
 		outStream.Write(m.receiverUsername);
 		outStream.Write(m.subject);
 		outStream.Write(m.body);
+		outStream.Write(m.date);
 	}
 	// TODO: Send the packet (pass the outStream to the sendPacket function)
 	sendPacket(socket,outStream);
@@ -130,6 +131,7 @@ void ModuleServer::onPacketReceivedSendMessage(SOCKET socket, const InputMemoryS
 	stream.Read(message.receiverUsername);
 	stream.Read(message.subject);
 	stream.Read(message.body);
+	stream.Read(message.date);
 	// Insert the message in the database
 	database()->insertMessage(message);
 }

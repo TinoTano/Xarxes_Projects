@@ -7,7 +7,7 @@ bool ModuleMessageView::update()
 
 	if (message != "")
 	{
-		ImGui::Text(subject);
+		ImGui::TextWrapped("Subject: %s", subject);
 		ImGui::TextWrapped("Sender: %s", sender);
 		ImGui::TextWrapped("Date: %s", sentDate);
 		ImGui::Separator();

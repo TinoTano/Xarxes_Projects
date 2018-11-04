@@ -29,7 +29,7 @@ private:
 
 	void sendPacketQueryMessages();
 
-	void sendPacketSendMessage(const char *receiver, const char *subject, const char *message);
+	void sendPacketSendMessage(const char *receiver, const char *subject, const char *message, const char* date);
 
 	void sendPacket(const OutputMemoryStream &stream);
 
@@ -91,11 +91,14 @@ private:
 	// All messages in the client inbox
 	std::vector<Message> messages;
 
+	std::vector<Message> DBmessages;
+
 	// Composing Message buffers (for IMGUI)
 	char senderBuf[64] = "loginName";   // Buffer for the sender
 	char receiverBuf[64]; // Buffer for the receiver
 	char subjectBuf[256]; // Buffer for the subject
 	char messageBuf[4096];// Buffer for the message
+	char* date;// Buffer for the message
 
 
 	// Send and receive buffers (low-level stuff)

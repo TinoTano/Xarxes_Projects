@@ -4,6 +4,9 @@
 #include "serialization/PacketTypes.h"
 #include "ModuleMessageView.h"
 #include "Application.h"
+#include "ModuleServer.h"
+#include <ctime>
+#include "database/MySqlDatabaseGateway.h"
 
 #define HEADER_SIZE sizeof(uint32_t)
 #define RECV_CHUNK_SIZE 4096
@@ -58,7 +61,7 @@ void ModuleClient::updateMessenger()
 		// Idle, do nothing
 		break;
 	case ModuleClient::MessengerState::SendingMessage:
-		sendPacketSendMessage(receiverBuf, subjectBuf, messageBuf);
+		sendPacketSendMessage(receiverBuf, subjectBuf, messageBuf, date);
 		break;
 	default:
 		break;
@@ -98,6 +101,7 @@ void ModuleClient::onPacketReceivedQueryAllMessagesResponse(const InputMemoryStr
 		stream.Read(temp.receiverUsername);
 		stream.Read(temp.subject);
 		stream.Read(temp.body);
+		stream.Read(temp.date);
 		messages.push_back(temp);
 	}
 	// NOTE: The messages vector is an attribute of this class
@@ -129,7 +133,7 @@ void ModuleClient::sendPacketQueryMessages()
 	messengerState = MessengerState::ReceivingMessages;
 }
 
-void ModuleClient::sendPacketSendMessage(const char * receiver, const char * subject, const char *message)
+void ModuleClient::sendPacketSendMessage(const char * receiver, const char * subject, const char *message, const char* date)
 {
 	OutputMemoryStream stream;
 
@@ -140,6 +144,7 @@ void ModuleClient::sendPacketSendMessage(const char * receiver, const char * sub
 	stream.Write(std::string(receiver));
 	stream.Write(std::string(subject));
 	stream.Write(std::string(message));
+	stream.Write(std::string(date));
 	// TODO: Use sendPacket() to send the packet
 	sendPacket(stream);
 	messengerState = MessengerState::RequestingMessages;
@@ -163,7 +168,6 @@ void ModuleClient::sendPacket(const OutputMemoryStream & stream)
 void ModuleClient::updateGUI()
 {
 	ImGui::Begin("Client Window");
-
 
 	if (state == ClientState::Disconnected)
 	{
@@ -207,6 +211,9 @@ void ModuleClient::updateGUI()
 			ImGui::InputTextMultiline("Message", messageBuf, sizeof(messageBuf));
 			if (ImGui::Button("Send"))
 			{
+				time_t now = time(0);
+				date = ctime(&now);
+
 				messengerState = MessengerState::SendingMessage;
 			}
 			if (ImGui::Button("Discard"))
