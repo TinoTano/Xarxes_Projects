@@ -56,7 +56,7 @@ void MySqlDatabaseGateway::insertMessage(const Message & message)
 
 		std::string sqlStatement;
 		// TODO: Create the SQL statement to insert the passed message into the DB (INSERT)
-		sqlStatement = "INSERT INTO messages VALUES ( (SELECT userid FROM user WHERE name = '" + message.senderUsername + "'), (SELECT userid FROM user WHERE name = '" + message.receiverUsername + "'), " + message.subject + ", " + message.body + ", " + str + ");";
+		sqlStatement = "INSERT INTO messages (sender, receiver, subject, message) VALUES ( (SELECT userid FROM user WHERE name = '" + message.senderUsername + "'), (SELECT userid FROM user WHERE name = '" + message.receiverUsername + "'), '" + message.subject + "', '" + message.body + "');";
 
 		// insert some messages
 		db.sql(sqlStatement.c_str());
@@ -73,7 +73,7 @@ std::vector<Message> MySqlDatabaseGateway::getAllMessagesReceivedByUser(const st
 	{
 		std::string sqlStatement;
 		// TODO: Create the SQL statement to query all messages from the given user (SELECT)
-		sqlStatement = "SELECT * FROM messages WHERE receiver = (SELECT userid FROM users WHERE name = '" + username + "');";
+		sqlStatement = "SELECT (SELECT name FROM user WHERE userid = (SELECT sender FROM messages WHERE receiver = (SELECT userid FROM user WHERE name = '" + username + "'))), (SELECT name FROM user WHERE userid = (SELECT receiver FROM messages WHERE receiver = (SELECT userid FROM user WHERE name = '" + username + "'))), subject, message, date  FROM messages WHERE receiver = (SELECT userid FROM user WHERE name = '" + username + "');";
 
 		// consult all messages
 		DBResultSet res = db.sql(sqlStatement.c_str());
