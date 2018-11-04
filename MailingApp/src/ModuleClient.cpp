@@ -240,7 +240,7 @@ void ModuleClient::updateGUI()
 			{
 				if (ImGui::Selectable(("- " + message.subject).c_str()))
 				{
-					App->modMessageView->SetMessageToShow(message.subject.c_str(), message.senderUsername.c_str(), "1/10/2018", message.body.c_str());
+					App->modMessageView->SetMessageToShow(message.subject.c_str(), message.senderUsername.c_str(), message.date.c_str(), message.body.c_str());
 				}
 				/*ImGui::PushID(i++);
 				if (ImGui::TreeNode(&message, "%s - %s", message.senderUsername.c_str(), message.subject.c_str()))

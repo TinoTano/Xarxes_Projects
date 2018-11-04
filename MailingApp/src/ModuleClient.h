@@ -63,12 +63,12 @@ private:
 	ClientState state = ClientState::Disconnected;
 
 	// IP address of the server
-	//char serverIP[32] = "127.0.0.1";
-	char serverIP[32] = "sql2.freemysqlhosting.net";
+	char serverIP[32] = "127.0.0.1";
+	//char serverIP[32] = "sql2.freemysqlhosting.net";
 
 	// Port used by the server
-	//int serverPort = 8000;
-	int serverPort = 3306;
+	int serverPort = 8000;
+	//int serverPort = 3306;
 
 	// Socket to connect to the server
 	SOCKET connSocket;
