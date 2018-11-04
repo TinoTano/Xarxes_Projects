@@ -43,20 +43,15 @@ void MySqlDatabaseGateway::insertMessage(const Message & message)
 		DBResultSet res;
 		
 		// Get time
+		time_t now = time(0);
 		char str[26];
 
-#ifdef __STDC_LIB_EXT1__
-		struct tm buf;
-		asctime_s(str, sizeof str, gmtime_s(&t, &buf));
-		printf("UTC:   %s", str);
-		asctime_s(str, sizeof str, localtime_s(&t, &buf));
-		printf("local: %s", str);
-#endif
+		ctime_s(str, sizeof str, &now);
 		// ----
 
 		std::string sqlStatement;
 		// TODO: Create the SQL statement to insert the passed message into the DB (INSERT)
-		sqlStatement = "INSERT INTO messages (sender, receiver, subject, message) VALUES ( (SELECT userid FROM user WHERE name = '" + message.senderUsername + "'), (SELECT userid FROM user WHERE name = '" + message.receiverUsername + "'), '" + message.subject + "', '" + message.body + "');";
+		sqlStatement = "INSERT INTO messages (sender, receiver, subject, message, date) VALUES ( (SELECT userid FROM user WHERE name = '" + message.senderUsername + "'), (SELECT userid FROM user WHERE name = '" + message.receiverUsername + "'), '" + message.subject + "', '" + message.body + "', '" + str + "');";
 
 		// insert some messages
 		db.sql(sqlStatement.c_str());
