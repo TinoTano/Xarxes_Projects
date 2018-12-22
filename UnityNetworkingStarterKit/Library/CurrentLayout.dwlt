@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 8}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_MinSize: {x: 481, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 53
+  controlID: 45
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 12008, y: 14042}
   vertical: 1
-  controlID: 51
+  controlID: 43
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 221}
   m_MaxSize: {x: 12008, y: 4021}
   vertical: 0
-  controlID: 52
+  controlID: 44
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &9
 MonoBehaviour:
@@ -440,20 +440,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Characters/Girl
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Characters/Girl
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\danielgo3\Documents\GitHub\Xarxes_Projects\UnityNetworkingStarterKit
+  m_LastProjectPath: C:\Users\viria\OneDrive\Documentos\GitHub\Xarxes_Projects\UnityNetworkingStarterKit
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: de100000
-    m_LastClickedID: 4318
-    m_ExpandedIDs: 00000000ea0e00008a12000000ca9a3b
+    scrollPos: {x: 0, y: 18}
+    m_SelectedIDs: 862d0000
+    m_LastClickedID: 11654
+    m_ExpandedIDs: 000000007a2b0000262f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -481,7 +481,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea0e00008a120000
+    m_ExpandedIDs: 000000007a2b0000262f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -597,9 +597,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9a110000
-    m_LastClickedID: 0
-    m_ExpandedIDs: 9ae7ffff6cfbffff00000000a4120000
+    m_SelectedIDs: 2209ffff
+    m_LastClickedID: -63198
+    m_ExpandedIDs: 5c74feff7ca0feff2209ffff2409ffff8859ffffc06effffd8fbffff00000000662f000006310000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -618,7 +618,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 2}
     m_SearchString: 
   m_ExpandedScenes:
-  - Character select
+  - Game
   m_CurrenRootInstanceID: 0
   m_LockTracker:
     m_IsLocked: 0
@@ -649,14 +649,14 @@ MonoBehaviour:
     height: 646
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 805.939970343856
+  lastFramingTime: 1782.1249538779202
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.00077831745, y: 1.0579091, z: 0.005291581}
+    m_Target: {x: 379.13312, y: 323.931, z: 74.58826}
     speed: 2
-    m_Value: {x: -0.00077831745, y: 1.0579091, z: 0.005291581}
+    m_Value: {x: 379.13312, y: 323.931, z: 74.58826}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -684,13 +684,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.19353762, y: 0.18332362, z: -0.03684773, w: -0.9631191}
+    m_Target: {x: 0.2589263, y: -0.079300314, z: 0.021262696, w: 0.9624139}
     speed: 2
-    m_Value: {x: -0.19353564, y: 0.18332174, z: -0.036847353, w: -0.9631092}
+    m_Value: {x: 0.2589232, y: -0.07929937, z: 0.021262443, w: 0.96240246}
   m_Size:
-    m_Target: 10.022508
+    m_Target: 1324.9741
     speed: 2
-    m_Value: 10.022508
+    m_Value: 1324.9741
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -801,8 +801,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1605
+    x: 1720
     y: 92
-    width: 315
-    height: 655
+    width: 200
+    height: 646
   m_PersistentViewDataDictionary: {fileID: 0}

@@ -16,6 +16,10 @@ public class MsgTypes
 public class CustomNetworkManager : NetworkManager {
 
     public short playerPrefabIndex;
+    private int numplayers = 0;
+
+    public GameObject ball;
+    public GameObject walls;
 
     public override void OnStartServer()
     {
@@ -27,6 +31,9 @@ public class CustomNetworkManager : NetworkManager {
     {
         client.RegisterHandler(MsgTypes.PlayerPrefabSelect, OnPrefabRequest);
         base.OnClientConnect(conn);
+
+        ball.SetActive(true);
+        walls.SetActive(false);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
